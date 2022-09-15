@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { SummaryComponent } from '@pages/summary/summary.component';
 import { TransactionsListComponent } from '@pages/transactions-list/transactions-list.component';
 
-
 const routes: Routes = [
-
+  { path: '', component: SummaryComponent },
+  { path: 'navigator', component: TransactionsListComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class PagesRoutingModule { }
