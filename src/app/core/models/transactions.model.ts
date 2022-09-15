@@ -44,7 +44,7 @@ export type MainPageCategories = Record<TRANSACTION_TYPES, ICategoryData>;
 // CONSTANTS
 export const TRANSACTION_NAMES = {
   [TRANSACTION_TYPES.INCOME]: 'Income',
-  [TRANSACTION_TYPES.OUTCOME]: 'Outcome',
-  [TRANSACTION_TYPES.LOAN]: 'Loans',
   [TRANSACTION_TYPES.INVESTMENT]: 'Investments',
+  [TRANSACTION_TYPES.LOAN]: 'Loans',
+  [TRANSACTION_TYPES.OUTCOME]: 'Outcome'
 }

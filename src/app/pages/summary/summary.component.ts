@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService } from '@core/services/transactions.service';
 import { Subject, takeUntil } from 'rxjs';
-import { ITransaction, MainPageCategories, TRANSACTION_TYPES } from '@core/models/interfaces';
+import {
+  ICategoryData,
+  ITransaction,
+  MainPageCategories,
+  TRANSACTION_NAMES,
+  TRANSACTION_TYPES
+} from '@core/models/transactions.model';
 
 @Component({
   selector: 'app-summary',
@@ -10,7 +16,8 @@ import { ITransaction, MainPageCategories, TRANSACTION_TYPES } from '@core/model
 })
 export class SummaryComponent implements OnInit {
   public total: number;
-  public transactions: MainPageCategories;
+  public transactions: ICategoryData[];
+  public transactionNames = TRANSACTION_NAMES;
   private destroy = new Subject<void>();
 
   constructor(private transactionsService: TransactionsService) { }
@@ -27,9 +34,8 @@ export class SummaryComponent implements OnInit {
       .subscribe({
         next: ({total, ...categories}) => {
           this.total = total;
-          this.transactions = categories;
+          this.transactions = Object.keys(categories).map(item => ({...categories[item as keyof typeof categories]}));
         }
       })
   }
-
 }

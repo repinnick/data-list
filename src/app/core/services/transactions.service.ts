@@ -8,7 +8,7 @@ import {
   TRANSACTION_NAMES,
   TRANSACTION_TYPES,
   TransactionName
-} from '@core/models/interfaces';
+} from '@core/models/transactions.model';
 import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
