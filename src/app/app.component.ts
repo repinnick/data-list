@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: '<routerlink-outlet></routerlink-outlet>'
 })
 export class AppComponent {
-  title = 'data-list';
 }
