@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionsService } from '@core/services/transactions.service';
 import { Subject, takeUntil } from 'rxjs';
-import { ICategoryData, TRANSACTION_TYPES } from '@core/models/transactions.model';
+import { ICategoryData } from '@core/models/transactions.model';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ICategoryData, TRANSACTION_TYPES } from '@core/models/transactions.mode
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent implements OnInit, OnDestroy {
   public total: number;
   public transactions: ICategoryData[];
   private destroy = new Subject<void>();
@@ -20,8 +20,6 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTransactions();
-
-    this.transactionsService.getTransactionsByFilter(TRANSACTION_TYPES.INVESTMENT).subscribe((res) => console.log(res))
   }
 
   private getTransactions(): void {
@@ -33,5 +31,10 @@ export class SummaryComponent implements OnInit {
           this.transactions = categories;
         }
       })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
   }
 }
