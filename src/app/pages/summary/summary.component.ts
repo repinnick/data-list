@@ -2,12 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionsService } from '@core/services/transactions.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ICategoryData } from '@core/models/transactions.model';
+import { fade } from '@core/animations/fade';
 
 
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.scss']
+  styleUrls: ['./summary.component.scss'],
+  animations: [fade]
 })
 export class SummaryComponent implements OnInit, OnDestroy {
   public total: number;

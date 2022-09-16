@@ -3,31 +3,13 @@ import { TransactionsService } from '@core/services/transactions.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ITransaction, TRANSACTION_NAMES, TRANSACTIONS_ORDER } from '@core/models/transactions.model';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { fade } from '@core/animations/fade';
 
 @Component({
   selector: 'app-transactions-list',
   templateUrl: './transactions-list.component.html',
   styleUrls: ['./transactions-list.component.scss'],
-  animations: [
-    trigger('fade', [
-      state('void', style({ opacity: 0 })),
-      state('*', style({ opacity: 1 })),
-
-      transition(':enter, :leave', [
-        animate(300)
-      ])
-    ]),
-    trigger('fadeLoading', [
-      state('void', style({ opacity: 0 })),
-      state('*', style({ opacity: 1 })),
-
-      transition(':enter, :leave', [
-        animate(0)
-      ])
-    ])
-
-  ]
+  animations: [fade]
 })
 export class TransactionsListComponent implements OnInit, OnDestroy {
   public tabCategories = TRANSACTIONS_ORDER;

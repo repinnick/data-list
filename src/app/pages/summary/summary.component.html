@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="row row-cols-12 text-center mt-3" *ngIf="transactions && transactions.length">
+<div class="row row-cols-12 text-center mt-3" *ngIf="transactions && transactions.length" @fade>
   <div class="col-md-6 col-12 mb-3" *ngFor="let transaction of transactions">
     <div class="card rounded-3 shadow-sm">
       <div class="card-body">
