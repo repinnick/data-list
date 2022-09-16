@@ -14,6 +14,7 @@ export class TransactionsListComponent implements OnInit, OnDestroy {
   public tabNames = TRANSACTION_NAMES;
   public transactions: ITransaction[];
   public activeTab: number;
+  public isLoading = false;
   private destroy = new Subject<void>();
 
   constructor(
@@ -34,11 +35,15 @@ export class TransactionsListComponent implements OnInit, OnDestroy {
   }
 
   private getCategoryData(idx: number) {
+    this.isLoading = true;
     const categoryName = TRANSACTIONS_ORDER[idx];
     this.transactionsService.getTransactionsByCategory(categoryName)
       .pipe(takeUntil(this.destroy))
       .subscribe({
-        next: (transactions) => this.transactions = transactions
+        next: (transactions) => {
+          this.transactions = transactions;
+          this.isLoading = false;
+        }
       })
   }
 

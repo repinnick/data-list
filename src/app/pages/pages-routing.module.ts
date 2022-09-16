@@ -5,7 +5,8 @@ import { TransactionsListComponent } from '@pages/transactions-list/transactions
 
 const routes: Routes = [
   { path: '', component: SummaryComponent },
-  { path: 'navigator', component: TransactionsListComponent }
+  { path: 'navigator', component: TransactionsListComponent },
+  { path: '**', redirectTo: '/'}
 ];
 
 @NgModule({

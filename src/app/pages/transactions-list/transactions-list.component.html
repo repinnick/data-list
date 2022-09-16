@@ -11,21 +11,29 @@
   </div>
 </nav>
 
-<div class="tab-content" id="nav-tabContent" *ngIf="transactions && transactions.length">
+<div class="tab-content" id="nav-tabContent">
   <div role="tabpanel">
     <table class="table table-sm w-100 mt-5">
       <thead class="text-center">
-        <tr>
-          <td class="w-70" style="border-top: unset">Name</td>
-          <td class="w-30" style="border-top: unset">Amount</td>
-        </tr>
+      <tr>
+        <td class="w-70" style="border-top: unset">Name</td>
+        <td class="w-30" style="border-top: unset">Amount</td>
+      </tr>
       </thead>
-      <tbody class="text-center">
-        <tr *ngFor="let transaction of transactions">
-          <td class="w-70"> {{ transaction.name.first + ' ' + transaction.name.last }}</td>
-          <td class="w-30"> {{ transaction.amount }}</td>
-        </tr>
-      </tbody>
+
+        <tbody class="text-center">
+          <tr *ngIf="isLoading; else displayData">
+            <td colspan="2">
+              <button class="btn btn-primary">Loading...</button>
+            </td>
+          </tr>
+          <ng-template #displayData>
+            <tr *ngFor="let transaction of transactions">
+              <td class="w-70"> {{ transaction.name.first + ' ' + transaction.name.last }}</td>
+              <td class="w-30"> {{ transaction.amount }}</td>
+            </tr>
+          </ng-template>
+        </tbody>
     </table>
   </div>
 </div>
