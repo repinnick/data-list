@@ -17,14 +17,15 @@ export interface ITransaction {
   _id: string;
 }
 
-export interface ITransactionsData extends MainPageCategories {
+export interface ITransactionsData {
   total: number;
+  categories: ICategoryData[];
 }
 
 export interface ICategoryData {
   total: number;
   name: string;
-  id: number;
+  id?: number;
 }
 
 // ENUMS
@@ -38,8 +39,8 @@ export enum TRANSACTION_TYPES {
 
 // TYPES
 
-export type TransactionName = TRANSACTION_TYPES.INCOME | TRANSACTION_TYPES.OUTCOME | TRANSACTION_TYPES.LOAN | TRANSACTION_TYPES.INVESTMENT;
-export type MainPageCategories = Record<TRANSACTION_TYPES, ICategoryData>;
+export type TransactionCategories = TRANSACTION_TYPES.INCOME | TRANSACTION_TYPES.OUTCOME | TRANSACTION_TYPES.LOAN | TRANSACTION_TYPES.INVESTMENT;
+export type TransactionCategoriesView = Record<TRANSACTION_TYPES, ICategoryData>;
 
 // CONSTANTS
 export const TRANSACTION_NAMES = {
@@ -48,3 +49,10 @@ export const TRANSACTION_NAMES = {
   [TRANSACTION_TYPES.LOAN]: 'Loans',
   [TRANSACTION_TYPES.OUTCOME]: 'Outcome'
 }
+
+export const TRANSACTIONS_ORDER = [
+  TRANSACTION_TYPES.INCOME,
+  TRANSACTION_TYPES.INVESTMENT,
+  TRANSACTION_TYPES.LOAN,
+  TRANSACTION_TYPES.OUTCOME
+]
