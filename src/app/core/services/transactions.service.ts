@@ -34,7 +34,7 @@ export class TransactionsService {
             .sort((a , b) => TRANSACTIONS_ORDER.indexOf(a as keyof typeof categories) - TRANSACTIONS_ORDER.indexOf(b as keyof typeof categories))
             .map((item, idx) => ({
               ...categories[item as keyof typeof categories],
-              id: idx + 1
+              id: idx
             }))
           return {
             total,

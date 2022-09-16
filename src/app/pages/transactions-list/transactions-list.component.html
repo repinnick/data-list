@@ -1,1 +1,23 @@
-<p>transactions-list works!</p>
+<nav>
+  <div class="nav nav-tabs d-flex" id="nav-tab" role="tablist">
+    <button
+      *ngFor="let category of tabCategories; let idx = index"
+      class="nav-link flex-grow-1 flex-shrink-1"
+      [ngClass]="{'active': idx === activeTab}"
+      id="nav-home-tab"
+      data-bs-toggle="tab" data-bs-target="#nav-home"
+      type="button"
+      role="tab"
+      aria-controls="nav-home"
+      aria-selected="true"
+      (click)="changeActiveTab(idx)"
+    >{{ tabNames[category] }}</button>
+  </div>
+</nav>
+<!--      routerLink="/navigator"-->
+<!--      [queryParams]="{tab: idx}"-->
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>

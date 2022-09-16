@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService } from '@core/services/transactions.service';
 import { Subject, takeUntil } from 'rxjs';
-import {
-  ICategoryData,
-  TRANSACTION_NAMES,
-  TRANSACTION_TYPES
-} from '@core/models/transactions.model';
+import { ICategoryData, TRANSACTION_TYPES } from '@core/models/transactions.model';
+
 
 @Component({
   selector: 'app-summary',
@@ -15,10 +12,11 @@ import {
 export class SummaryComponent implements OnInit {
   public total: number;
   public transactions: ICategoryData[];
-  public transactionNames = TRANSACTION_NAMES;
   private destroy = new Subject<void>();
 
-  constructor(private transactionsService: TransactionsService) { }
+  constructor(
+    private transactionsService: TransactionsService
+  ) { }
 
   ngOnInit(): void {
     this.getTransactions();
@@ -26,7 +24,7 @@ export class SummaryComponent implements OnInit {
     this.transactionsService.getTransactionsByFilter(TRANSACTION_TYPES.INVESTMENT).subscribe((res) => console.log(res))
   }
 
-  getTransactions() {
+  private getTransactions(): void {
     this.transactionsService.getTransactions()
       .pipe(takeUntil(this.destroy))
       .subscribe({

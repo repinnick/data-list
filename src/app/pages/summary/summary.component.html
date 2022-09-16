@@ -5,20 +5,20 @@
       <div class="card-body">
         <h1 class="card-title pricing-card-title">Welcome</h1>
         <p>With supporting text bellow as a natural lead-in to additional content</p>
-        <button type="button" class="btn btn-primary">See transactions</button>
+        <button routerLink="/navigator" [queryParams]="{tab: 0}" type="button" class="btn btn-primary">See transactions</button>
       </div>
       <div class="card-footer">You have {{ total }} transactions</div>
     </div>
   </div>
 </div>
 
-<div class="row row-cols-12 text-center mt-3">
+<div class="row row-cols-12 text-center mt-3" *ngIf="transactions && transactions.length">
   <div class="col-md-6 col-12 mb-3" *ngFor="let transaction of transactions">
     <div class="card rounded-3 shadow-sm">
       <div class="card-body">
         <h3 class="card-title pricing-card-title">{{ transaction.total }}</h3>
         <p>{{ transaction.name }}</p>
-        <button type="button" routerLink="navigator" class="w-50 btn btn-primary">See all</button>
+        <button type="button" routerLink="/navigator" [queryParams]="{tab: transaction.id}" class="w-50 btn btn-primary">See all</button>
       </div>
     </div>
   </div>
