@@ -42,7 +42,7 @@ export class TransactionsListComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (transactions) => {
           this.transactions = transactions;
-          this.isLoading = false;
+          setTimeout(() => this.isLoading = false, 1000)
         }
       })
   }
