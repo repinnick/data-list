@@ -23,34 +23,14 @@ export class TransactionsListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activeTab = this.getQueryParamsFromRoute();
+    this.activeTab = Number(this.activatedRoute.snapshot.queryParams['tab']);
     this.getCategoryData(this.activeTab);
-    this.handleRouteChange();
   }
 
   public changeActiveTab(idx: number): void {
     this.router.navigate([], {queryParams: {tab: idx}})
-  }
-
-  /**
-   * Or we can change active tab in changeActiveTab function and remove this
-   * @private
-   */
-  private handleRouteChange(): void {
-    this.router.events
-      .pipe(takeUntil(this.destroy))
-      .subscribe({
-        next: navigation => {
-          if (navigation instanceof NavigationEnd) {
-            this.activeTab = this.getQueryParamsFromRoute();
-            this.getCategoryData(this.activeTab);
-          }
-        }
-      })
-  }
-
-  private getQueryParamsFromRoute(): number {
-    return Number(this.activatedRoute.snapshot.queryParams['tab']);
+    this.activeTab = idx;
+    this.getCategoryData(idx);
   }
 
   private getCategoryData(idx: number) {
@@ -58,7 +38,10 @@ export class TransactionsListComponent implements OnInit {
     this.transactionsService.getTransactionsByFilter(categoryName)
       .pipe(takeUntil(this.destroy))
       .subscribe({
-        next: (transactions) => this.transactions = transactions,
+        next: (transactions) => {
+          console.log(transactions)
+          this.transactions = transactions
+        },
       })
   }
 }

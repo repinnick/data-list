@@ -4,20 +4,28 @@
       *ngFor="let category of tabCategories; let idx = index"
       class="nav-link flex-grow-1 flex-shrink-1"
       [ngClass]="{'active': idx === activeTab}"
-      id="nav-home-tab"
-      data-bs-toggle="tab" data-bs-target="#nav-home"
       type="button"
       role="tab"
-      aria-controls="nav-home"
-      aria-selected="true"
       (click)="changeActiveTab(idx)"
     >{{ tabNames[category] }}</button>
   </div>
 </nav>
-<!--      routerLink="/navigator"-->
-<!--      [queryParams]="{tab: idx}"-->
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+
+<div class="tab-content" id="nav-tabContent" *ngIf="transactions && transactions.length">
+  <div role="tabpanel">
+    <table class="table table-sm w-100 mt-5">
+      <thead class="text-center">
+        <tr>
+          <td class="w-70" style="border-top: unset">Name</td>
+          <td class="w-30" style="border-top: unset">Amount</td>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr *ngFor="let transaction of transactions">
+          <td class="w-70"> {{ transaction.name.first + ' ' + transaction.name.last }}</td>
+          <td class="w-30"> {{ transaction.amount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
