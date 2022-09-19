@@ -6,7 +6,8 @@
       [ngClass]="{'active': idx === activeTab}"
       type="button"
       role="tab"
-      (click)="changeActiveTab(idx)"
+      [routerLink]="['./']"
+      [queryParams]="{tab: idx}"
     >{{ tabNames[category] }}</button>
   </div>
 </nav>

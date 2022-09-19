@@ -1,8 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionsService } from '@core/services/transactions.service';
 import { Subject, takeUntil } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ITransaction, TRANSACTION_NAMES, TRANSACTIONS_ORDER } from '@core/models/transactions.model';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ITransaction,
+  ITransactionsQueryParams,
+  TRANSACTION_NAMES,
+  TRANSACTIONS_ORDER
+} from '@core/models/transactions.model';
 import { fade } from '@core/animations/fade';
 
 @Component({
@@ -27,14 +32,21 @@ export class TransactionsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activeTab = Number(this.activatedRoute.snapshot.queryParams['tab']);
     this.getCategoryData(this.activeTab);
+    this.handleRouteChange()
   }
 
-  public changeActiveTab(idx: number): void {
-    if (idx !== this.activeTab) {
-      this.router.navigate([], {queryParams: {tab: idx}})
-      this.activeTab = idx;
-      this.getCategoryData(idx);
-    }
+  public handleRouteChange(): void {
+    this.router.events
+      .pipe(takeUntil(this.destroy))
+      .subscribe({
+        next: (event) => {
+          if (event instanceof NavigationEnd) {
+            const tabId = Number((this.activatedRoute.snapshot.queryParams as ITransactionsQueryParams).tab)
+            this.activeTab = tabId;
+            this.getCategoryData(tabId)
+          }
+        }
+      })
   }
 
   private getCategoryData(idx: number) {

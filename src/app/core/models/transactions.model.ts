@@ -28,6 +28,9 @@ export interface ICategoryData {
   id?: number;
 }
 
+export interface ITransactionsQueryParams {
+  tab: number;
+}
 // ENUMS
 
 export enum TRANSACTION_TYPES {
